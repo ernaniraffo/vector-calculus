@@ -14,6 +14,12 @@ class Vector3D:
 
     def dot(self, other):
         return self * other
+
+    def cross(self, other):
+        i = self.y * other.z - self.z * other.y
+        j = self.z * other.x - self.x * other.z
+        k = self.x * other.y - self.y * other.x
+        return Vector3D(i, j, k)
     
     def length(self):
         return sqrt(self.x**2 + self.y**2 + self.z**2)
