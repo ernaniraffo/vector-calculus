@@ -25,8 +25,7 @@ class Vector3D:
         return sqrt(self.x**2 + self.y**2 + self.z**2)
 
     def normalize(self):
-        length = self.length()
-        self /= length
+        self /= self.length
         
     def projection(self, other):
         scalar = (other * self) / other.length()**2
@@ -35,11 +34,29 @@ class Vector3D:
     def __add__(self, other):
         return Vector3D(self.x + other.x, self.y + other.y, self.z + other.z)
 
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
+
     def __sub__(self, other):
         return Vector3D(self.x - other.x, self.y - other.y, self.z - other.z)
 
+    def __isub__(self, other):
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        return self
+
     def __mul__(self, other):
         return self.x * other.x + self.y * other.y + self.z * other.z
+
+    def __imul__(self, other):
+        self.x *= other.x
+        self.y *= other.y
+        self.z *= other.z
+        return self
 
     def __truediv__(self, num):
         return Vector3D(self.x / num, self.y / num, self.z / num)
@@ -48,6 +65,7 @@ class Vector3D:
         self.x /= num
         self.y /= num
         self.z /= num
+        return self
 
     def __str__(self):
         return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
